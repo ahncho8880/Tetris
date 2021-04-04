@@ -1,62 +1,61 @@
-*{
-     margin: 0;
-     padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-ul{
-     list-style: none;
+ul {
+  list-style: none;
 }
-body{
-     height: 100%;
-     overflow: hidden;
+body {
+  height: 100%;
+  overflow: hidden;
 }
-.score{
-     text-align: center;
-     font-size: 36px;
-     margin-bottom: 2rem;
-     margin-top: 1rem;
+.score {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
-.playground > ul{
-    border: 1px solid #333333;
-    width: 250px;
-    margin: auto;
+.playground > ul {
+  /* border: 1px solid #333333; */
+  width: 500px;
+  height: 1000px;
+  margin: auto;
+  background-color: #000000;
+  outline: 20px solid #00fffb;
 }
-.playground > ul>li{
-     width: 100%;
-     height: 25px;
+.playground > ul > li {
+  width: 100%;
+  height: 50px;
 }
-.playground > ul>li>ul{
-    display: flex;
+.playground > ul > li > ul {
+  display: flex;
 }
-.playground > ul > li > ul > li{
-    width: 25px;
-    height: 25px;
-    
+.playground > ul > li > ul > li {
+  width: 50px;
+  height: 50px;
+  outline: 1px solid gray;
 }
-.Tmino{
-     outline:1px solid #cccccc;
-     background-color: #ff00b3;
+.preview {
+  background: rgba(255, 0, 0, 0.4);
 }
-.Omino{
-     outline:1px solid #cccccc;
-     background: #fbff00;
+.Tmino {
+  background: purple;
 }
-.Imino{
-     outline:1px solid #cccccc;
-     background-color: #00e5ff;
+.Omino {
+  background: yellow;
 }
-.Zmino{
-     outline:1px solid #cccccc;
-     background: #ff0000;
+.Imino {
+  background: skyblue;
 }
-.Smino{
-     outline:1px solid #cccccc;
-     background-color: #00fe48;
+.Zmino {
+  background: red;
 }
-.Jmino{
-     outline:1px solid #cccccc;
-     background: #0400ff;
+.Smino {
+  background: greenyellow;
 }
-.Lmino{
-     outline:1px solid #cccccc;
-     background-color: #fe8c00;
+.Jmino {
+  background: blue;
+}
+.Lmino {
+  background: orange;
 }
