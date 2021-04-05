@@ -10,18 +10,47 @@ body {
   overflow: hidden;
 }
 .score {
-  text-align: center;
+  /* text-align: center;
   font-size: 36px;
   margin-bottom: 2rem;
-  margin-top: 1rem;
+  margin-top: 1rem; */
+}
+
+.bar {
+  border: 10px solid #15b19a;
+  border-style: double;
+  width: 500px;
+  height: 125px;
+  background: #000000;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+.bar > ul {
+  width: 500px;
+  height: 125px;
+  margin-left: 280px;
+  margin-top: 12px;
+}
+.bar > ul > li {
+  width: 100%;
+  height: 50px;
+}
+.bar > ul > li > ul {
+  display: flex;
+}
+.bar > ul > li > ul > li {
+  width: 50px;
+  height: 50px;
+  /* background: white; */
 }
 .playground > ul {
   /* border: 1px solid #333333; */
+  border: 10px solid #15b19a;
+  border-style: double;
   width: 500px;
   height: 1000px;
   margin: auto;
-  background-color: #000000;
-  outline: 20px solid #00fffb;
+  background: #000000;
 }
 .playground > ul > li {
   width: 100%;
@@ -33,29 +62,61 @@ body {
 .playground > ul > li > ul > li {
   width: 50px;
   height: 50px;
-  outline: 1px solid gray;
+  /* outline: 1px solid #cccccc; */
 }
 .preview {
-  background: rgba(255, 0, 0, 0.4);
+  /* border: 10px solid gray; */
+  /* border: 10px solid rgba(230, 224, 224, 0.4); */
+  /* box-sizing: border-box; */
+  /* background: rgba(230, 224, 224, 0.4); */
+  background: gray;
+  outline: 1px solid #cccccc;
 }
 .Tmino {
+  /* border: 10px solid rgba(230, 224, 224, 0.4); */
+  box-sizing: border-box;
+  border-style: outset;
   background: purple;
+  /* background: radial-gradient(ellipse at 15% 15%, white, purple, purple); */
 }
 .Omino {
-  background: yellow;
+  box-sizing: border-box;
+  border-style: outset;
+  background: rgb(213, 213, 0);
+  /* background: radial-gradient(ellipse at 15% 15%, white, yellow, yellow); */
 }
 .Imino {
+  box-sizing: border-box;
+  border-style: outset;
   background: skyblue;
+  /* background: radial-gradient(ellipse at 15% 15%, white, skyblue, skyblue); */
 }
 .Zmino {
+  box-sizing: border-box;
+  border-style: outset;
   background: red;
+  /* background: radial-gradient(ellipse at 15% 15%, white, red, red); */
 }
 .Smino {
-  background: greenyellow;
+  box-sizing: border-box;
+  border-style: outset;
+  background: green;
+  /* background: radial-gradient(
+    ellipse at 15% 15%,
+    white,
+    greenyellow,
+    greenyellow
+  ); */
 }
 .Jmino {
+  box-sizing: border-box;
+  border-style: outset;
   background: blue;
+  /* background: radial-gradient(ellipse at 15% 15%, white, blue, blue); */
 }
 .Lmino {
+  box-sizing: border-box;
+  border-style: outset;
   background: orange;
+  /* background: radial-gradient(ellipse at 15% 15%, white, orange, orange); */
 }

@@ -1,17 +1,27 @@
 import BLOCKS from './blocks.js';
 
 const playground = document.querySelector('.playground>ul');
+const bar = document.querySelector('.bar>ul');
 const GAME_ROWS = 20;
 const GAME_COLS = 10;
-let totalScore = document.getElementsByClassName('score');
+const BAR_ROWS = 2;
+const BAR_COLS = 4;
+// let totalScore = document.getElementsByClassName('score');
 let score = 0;
 let duration = 1000;
 let downInterval;
 let tempMovingItem;
-let moveType = 'top';
+let tempNextItem;
+let moveType = '';
 let downRow = GAME_ROWS;
+let nextItem = {
+  type: '',
+  direction: 0,
+  top: 0,
+  left: 3,
+};
 const movingItem = {
-  type: 'Imino',
+  type: '',
   direction: 0,
   top: 0,
   left: 3,
@@ -20,17 +30,31 @@ const movingItem = {
 init();
 
 function init() {
-  totalScore[0].textContent = 0;
+  // totalScore[0].textContent = 0;
   tempMovingItem = { ...movingItem };
   for (let i = 0; i < GAME_ROWS; i++) {
     prependNewLine();
   }
+  for (let j = 0; j < BAR_ROWS; j++) {
+    prependBarLine();
+  }
+  randomBlock();
   generateNewBlock();
 }
 function randomBlock() {
   const blockArray = Object.entries(BLOCKS);
   const randomIndex = Math.floor(Math.random() * 7);
-  movingItem.type = blockArray[randomIndex][0];
+  nextItem.type = blockArray[randomIndex][0];
+}
+function prependBarLine() {
+  const li = document.createElement('li');
+  const ul = document.createElement('ul');
+  for (let j = 0; j < BAR_COLS; j++) {
+    const matrix = document.createElement('li');
+    ul.prepend(matrix);
+  }
+  li.prepend(ul);
+  bar.prepend(li);
 }
 function prependNewLine() {
   const li = document.createElement('li');
@@ -63,7 +87,7 @@ function renderBlocks() {
     if (isAvailable) {
       target.classList.add(type, 'moving');
       setDownRow(x, y);
-    } else if (!target) {
+    } else if (!target && moveType !== 'top') {
       tempMovingItem = { ...movingItem };
       setTimeout(() => {
         renderBlocks();
@@ -139,27 +163,43 @@ function checkLine() {
     if (matched) {
       child.remove();
       prependNewLine();
-      score += 10;
+      score += 1;
       duration -= 10;
       console.log(duration);
     }
 
-    totalScore[0].textContent = score;
+    // totalScore[0].textContent = score;
   });
 }
 function generateNewBlock() {
   clearInterval(downInterval);
   downInterval = setInterval(() => {
-    moveType = 'top';
     moveBlock('top', 1);
   }, duration);
   checkLine();
-  randomBlock();
+
+  movingItem['type'] = nextItem['type'];
   movingItem.direction = 0;
   movingItem.left = 3;
   movingItem.top = 0;
-  tempMovingItem = { ...movingItem };
+  tempMovingItem = tempNextItem ? tempNextItem : { ...movingItem };
+  getNextBlock();
   renderBlocks();
+}
+function getNextBlock() {
+  const nextBlocks = document.querySelectorAll('.nextBlock');
+  nextBlocks.forEach((next) => {
+    next.classList.remove(tempNextItem.type, 'nextBlock');
+  });
+  randomBlock();
+  tempNextItem = { ...nextItem };
+  const { type } = tempNextItem;
+  BLOCKS[type][4].forEach((block) => {
+    const x = block[0];
+    const y = block[1];
+    const target = bar.childNodes[x].childNodes[0].childNodes[y];
+    target.classList.add(type, 'nextBlock');
+  });
 }
 function checkMove(target) {
   if (!target || target.classList.contains('seized')) return false;
@@ -174,7 +214,7 @@ function changeDirection() {
     tempMovingItem['direction'] === 3 ? 0 : tempMovingItem['direction'] + 1;
   renderBlocks();
 }
-function dropBlock() {
+function dropBlock(moveType) {
   const { type } = tempMovingItem;
   const movingBlocks = document.querySelectorAll('.moving');
   const movingPreBlocks = document.querySelectorAll('.preview');
@@ -191,23 +231,19 @@ function dropBlock() {
 document.addEventListener('keydown', (e) => {
   switch (e.keyCode) {
     case 37:
-      moveType = 'left';
-      moveBlock(moveType, -1);
+      moveBlock('left', -1);
       break;
     case 38:
       changeDirection();
       break;
     case 39:
-      moveType = 'left';
-      moveBlock(moveType, 1);
+      moveBlock('left', 1);
       break;
     case 40:
-      moveType = 'top';
-      moveBlock(moveType, 1);
+      moveBlock('top', 1);
       break;
     case 32:
-      moveType = 'top';
-      dropBlock();
+      dropBlock('top');
       break;
     default:
       break;
